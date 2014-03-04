@@ -9,7 +9,7 @@ ScDateHandler::ScDateHandler(QObject *parent) : QObject(parent)
 QString ScDateHandler::weeksTo(const QDateTime &date) const
 {
     QDateTime now(QDateTime::currentDateTime());
-    return QString::number(now.daysTo(date) / 7.0, 'g', 2);
+    return QString::number(now.daysTo(date) / 7.0, 'f', 2);
 }
 
 QString ScDateHandler::daysTo(const QDateTime &date) const
@@ -21,7 +21,7 @@ QString ScDateHandler::daysTo(const QDateTime &date) const
 QString ScDateHandler::hoursTo(const QDateTime &date) const
 {
     QDateTime now(QDateTime::currentDateTime());
-    return QString::number(now.secsTo(date) / 3600.0, 'g', 2);
+    return QString::number(now.secsTo(date) / 3600.0, 'f', 2);
 }
 
 QString ScDateHandler::minutesTo(const QDateTime &date) const

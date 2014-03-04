@@ -37,6 +37,7 @@ ApplicationWindow {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             width: mainRect.width
+            visible: false
 
             color: backgroundColor
 
@@ -185,6 +186,10 @@ ApplicationWindow {
         states: [
             State {
                 name: "dateSelectionShown"
+                PropertyChanges {
+                    target: dateSelection
+                    visible: true
+                }
                 AnchorChanges {
                     target: dateSelection
                     anchors.right: mainRect.right
