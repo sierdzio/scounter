@@ -1,0 +1,21 @@
+# .gitignore for SCounter project
+# Tells git to ignore build-related files.
+*.pro.user
+*.kate-swp
+*~
+build/
+doc/html
+Debug/
+Release/
+Makefile*
+.qmake.stash
+*.rc
+*.qm
+.DS_Store
+android-build/
+*.o
+*.json
+app_process
+*.so
+moc_*
+
