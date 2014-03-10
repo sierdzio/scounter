@@ -1,10 +1,13 @@
-#include "qtquick2controlsapplicationviewer.h"
+//#include "qtquick2controlsapplicationviewer.h"
 #include "scdatehandler.h"
 
 #include <QObject>
+#include <QUrl>
 #include <QtQml>
 #include <QQmlEngine>
 #include <QJSEngine>
+#include <QQuickView>
+#include <QApplication>
 
 static QObject *scSingleton(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
@@ -17,7 +20,7 @@ static QObject *scSingleton(QQmlEngine *engine, QJSEngine *scriptEngine)
 
 int main(int argc, char *argv[])
 {
-    Application app(argc, argv);
+    QApplication app(argc, argv);
     app.setApplicationName("SCounter");
     app.setApplicationVersion("1.0");
     app.setOrganizationName("sierdzio");
@@ -25,8 +28,10 @@ int main(int argc, char *argv[])
 
     qmlRegisterSingletonType<ScDateHandler>("SCounter", 1, 0, "DateHandler", scSingleton);
 
-    QtQuick2ControlsApplicationViewer viewer;
-    viewer.setMainQmlFile(QStringLiteral("qml/scounter/main.qml"));
+    QQuickView viewer;
+    viewer.setSource(QUrl("qrc:///qml/scounter/main.qml"));
+    //QtQuick2ControlsApplicationViewer viewer;
+    //viewer.setMainQmlFile(QStringLiteral("qrc://qml/scounter/main.qml"));
     viewer.show();
 
     return app.exec();

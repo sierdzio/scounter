@@ -29,6 +29,9 @@ OTHER_FILES += \
     qml/scounter/TimePicker.qml \
     android/AndroidManifest.xml
 
+RESOURCES += \
+    qmlResource.qrc
+
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 BUILDDIR = $$PWD/build/$$TARGET
@@ -38,3 +41,4 @@ OBJECTS_DIR = $${BUILDDIR}
 MOC_DIR = $${BUILDDIR}
 RCC_DIR = $${BUILDDIR}
 UI_DIR = $${BUILDDIR}
+

@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/scounter/main.qml</file>
+        <file>qml/scounter/TimeLabel.qml</file>
+        <file>qml/scounter/TimePicker.qml</file>
+    </qresource>
+</RCC>

@@ -4,7 +4,8 @@ import QtQuick.Controls 1.2
 import Qt.labs.settings 1.0
 import SCounter 1.0
 
-ApplicationWindow {
+//ApplicationWindow {
+Item {
     property bool firstRun: true
     property int defaultMargin: 15
     property int defaultBorderWidth: 2
@@ -14,7 +15,7 @@ ApplicationWindow {
     property string defaultTextColor: "#ffaaaaaa"
 
     id: root
-    title: qsTr("SCounter")
+    //title: qsTr("SCounter")
     width: 640
     height: 480
 
