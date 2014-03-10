@@ -3,10 +3,11 @@
 #include <QObject>
 #include <QUrl>
 #include <QtQml>
-#include <QQmlEngine>
-#include <QJSEngine>
 #include <QQuickView>
 #include <QGuiApplication>
+
+class QQmlEngine;
+class QJSEngine;
 
 static QObject *scSingleton(QQmlEngine *engine, QJSEngine *scriptEngine)
 {
