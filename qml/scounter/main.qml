@@ -32,54 +32,10 @@ ApplicationWindow {
         color: "#ff111111"
 
         Rectangle {
-            id: dateSelection
-            anchors.top: parent.top
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            width: mainRect.width
-            visible: false
-
-            color: backgroundColor
-
-            Calendar {
-                id: calendar
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.margins: defaultMargin
-                height: 300
-                visible: true
-            }
-
-            TimePicker {
-                id: timePicker
-                anchors.top: calendar.bottom
-                anchors.right: parent.right
-                anchors.margins: defaultMargin
-                textColor: defaultTextColor
-            }
-
-            Button {
-                id: dateButton
-                anchors.top: timePicker.bottom
-                anchors.right: parent.right
-                anchors.margins: defaultMargin
-                height: 30
-                width: 120
-                text: qsTr("Done")
-
-                onClicked: {
-                    firstRun = false;
-                    mainRect.state = "countingPaneShown";
-                }
-            }
-        }
-
-        Rectangle {
             id: countingPane
             visible: true
             anchors.top: parent.top
-            anchors.left: dateSelection.right
+            anchors.left: parent.left
             anchors.bottom: parent.bottom
             width: parent.width
 
@@ -183,23 +139,62 @@ ApplicationWindow {
             }
         }
 
+        Rectangle {
+            id: dateSelection
+            anchors.top: parent.top
+            anchors.left: countingPane.right
+            anchors.bottom: parent.bottom
+            width: mainRect.width
+
+            color: backgroundColor
+
+            Calendar {
+                id: calendar
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.margins: defaultMargin
+                height: 300
+                visible: true
+            }
+
+            TimePicker {
+                id: timePicker
+                anchors.top: calendar.bottom
+                anchors.right: parent.right
+                anchors.margins: defaultMargin
+                textColor: defaultTextColor
+            }
+
+            Button {
+                id: dateButton
+                anchors.top: timePicker.bottom
+                anchors.right: parent.right
+                anchors.margins: defaultMargin
+                height: 30
+                width: 120
+                text: qsTr("Done")
+
+                onClicked: {
+                    firstRun = false;
+                    mainRect.state = "countingPaneShown";
+                }
+            }
+        }
+
         states: [
             State {
                 name: "dateSelectionShown"
-                PropertyChanges {
-                    target: dateSelection
-                    visible: true
-                }
                 AnchorChanges {
-                    target: dateSelection
-                    anchors.right: mainRect.right
+                    target: countingPane
+                    anchors.right: mainRect.left
                 }
             },
             State {
                 name: "countingPaneShown"
                 AnchorChanges {
-                    target: dateSelection
-                    anchors.right: mainRect.left
+                    target: countingPane
+                    anchors.right: mainRect.right
                 }
             }
         ]
