@@ -15,7 +15,6 @@ Item {
     property string defaultTextColor: "#ffaaaaaa"
 
     id: root
-    //title: qsTr("SCounter")
     width: 640
     height: 480
 
@@ -35,10 +34,10 @@ Item {
         Rectangle {
             id: countingPane
             visible: true
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            width: parent.width
+            anchors.top: mainRect.top
+            anchors.left: mainRect.left
+            anchors.bottom: mainRect.bottom
+            width: mainRect.width
 
             color: backgroundColor
 
@@ -142,9 +141,9 @@ Item {
 
         Rectangle {
             id: dateSelection
-            anchors.top: parent.top
-            anchors.left: countingPane.right
-            anchors.bottom: parent.bottom
+            anchors.top: mainRect.top
+            anchors.left: mainRect.right
+            anchors.bottom: mainRect.bottom
             width: mainRect.width
 
             color: backgroundColor
@@ -190,12 +189,20 @@ Item {
                     target: countingPane
                     anchors.right: mainRect.left
                 }
+                AnchorChanges {
+                    target: dateSelection
+                    anchors.left: mainRect.left
+                }
             },
             State {
                 name: "countingPaneShown"
                 AnchorChanges {
                     target: countingPane
                     anchors.right: mainRect.right
+                }
+                AnchorChanges {
+                    target: dateSelection
+                    anchors.left: mainRect.right
                 }
             }
         ]
