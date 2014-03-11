@@ -5,7 +5,7 @@ import QtQuick.Particles 2.0
 import Qt.labs.settings 1.0
 import SCounter 1.0
 
-Item {
+Rectangle {
     property bool firstRun: true
     property int defaultMargin: 15
     property int defaultBorderWidth: 2
@@ -18,6 +18,8 @@ Item {
     id: root
     width: 640
     height: 480
+    color: "#025151"
+    //color: "#ff000000"
 
     Settings {
         property alias firstRun: root.firstRun
