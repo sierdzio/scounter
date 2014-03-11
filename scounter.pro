@@ -25,9 +25,6 @@ HEADERS += \
     scdatehandler.h
 
 OTHER_FILES += \
-    qml/scounter/main.qml \
-    qml/scounter/TimeLabel.qml \
-    qml/scounter/TimePicker.qml \
     android/AndroidManifest.xml
 
 RESOURCES += \

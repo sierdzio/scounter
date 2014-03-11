@@ -2,13 +2,14 @@ import QtQuick 2.2
 import QtQuick.Controls 1.2
 
 Rectangle {
+    property bool isHighlightedEntry: false
     property string text: "default"
     property string textColor: "#ffffffff"
 
     id: root
     height: 30
     width: 120
-    color: "#00000000"
+    radius: 10
 
     Label {
         text: root.text
@@ -20,7 +21,10 @@ Rectangle {
         font.pixelSize: 20
     }
 
-    onTextChanged: changeAnimation.start();
+    onTextChanged: {
+        if (!isHighlightedEntry)
+            changeAnimation.start();
+    }
 
     SequentialAnimation {
         id: changeAnimation

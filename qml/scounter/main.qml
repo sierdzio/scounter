@@ -1,18 +1,19 @@
 import QtQml 2.2
 import QtQuick 2.2
 import QtQuick.Controls 1.2
+import QtQuick.Particles 2.0
 import Qt.labs.settings 1.0
 import SCounter 1.0
 
-//ApplicationWindow {
 Item {
     property bool firstRun: true
     property int defaultMargin: 15
     property int defaultBorderWidth: 2
     property int defaultRadius: 10
-    property string backgroundColor: "#22000000"
+    property string backgroundColor: "#ff111111"
     property string defaultBorderColor: "#99444444"
     property string defaultTextColor: "#ffaaaaaa"
+    property string entryAdditionalColor: "#55aaaaaa"
 
     id: root
     width: 640
@@ -25,21 +26,86 @@ Item {
         property alias minutes: timePicker.minutes
     }
 
-    Rectangle {
+    Flipable {
         id: mainRect
-        state: firstRun? "dateSelectionShown" : "countingPaneShown"
         anchors.fill: parent
-        color: "#ff111111"
 
-        Rectangle {
+        Component.onCompleted: {
+            if (firstRun) {
+                mainRect.state = "dateSelectionShown";
+            }
+        }
+
+        front: Rectangle {
             id: countingPane
-            visible: true
-            anchors.top: mainRect.top
-            anchors.left: mainRect.left
-            anchors.bottom: mainRect.bottom
-            width: mainRect.width
-
+            anchors.fill: parent
             color: backgroundColor
+
+            ParticleSystem {
+                id: particleSystem
+                anchors.fill: parent
+
+                Emitter {
+                    enabled: true
+                    width: parent.width
+                    height: 10
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+
+                    emitRate: 25
+
+                    lifeSpan: 2800
+                    lifeSpanVariation: 800
+
+                    velocity: AngleDirection {
+                        magnitude: 300
+                        magnitudeVariation: 80
+                        angle: 270
+                        angleVariation: 40
+                    }
+
+                    acceleration: AngleDirection {
+                        magnitude: 20
+                        angle: 0
+                        angleVariation: 20
+                    }
+
+                    velocityFromMovement: 12
+                    size: 20
+                }
+
+                Turbulence {
+                    anchors.fill: parent
+                    strength: 8
+                }
+
+                ItemParticle {
+                    delegate: Rectangle {
+                        width: 15
+                        height: width
+                        radius: 5
+                        color: Qt.rgba(Math.random(), Math.random(), Math.random(), 0.2 + Math.random() - 0.4);
+                    }
+                }
+
+                Gravity {
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 50
+
+                    magnitude: 80
+                    angle: 180
+                }
+
+                Gravity {
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: 50
+
+                    magnitude: 80
+                    angle: 0
+                }
+            }
 
             Grid {
                 anchors.fill: parent
@@ -49,57 +115,67 @@ Item {
 
                 TimeLabel {
                     text: qsTr("Weeks")
-                    color: defaultTextColor
+                    textColor: defaultTextColor
+                    color: entryAdditionalColor
+                    isHighlightedEntry: true
                 }
 
                 TimeLabel {
                     id: weeks
                     text: "default"
-                    color: defaultTextColor
+                    textColor: defaultTextColor
                 }
 
                 TimeLabel {
                     text: qsTr("Days")
-                    color: defaultTextColor
+                    textColor: defaultTextColor
+                    color: entryAdditionalColor
+                    isHighlightedEntry: true
                 }
 
                 TimeLabel {
                     id: days
                     text: "default"
-                    color: defaultTextColor
+                    textColor: defaultTextColor
                 }
 
                 TimeLabel {
                     text: qsTr("Hours")
-                    color: defaultTextColor
+                    textColor: defaultTextColor
+                    color: entryAdditionalColor
+                    isHighlightedEntry: true
                 }
 
                 TimeLabel {
                     id: hours
                     text: "default"
-                    color: defaultTextColor
+                    textColor: defaultTextColor
                 }
 
                 TimeLabel {
                     text: qsTr("Minutes")
-                    color: defaultTextColor
+                    textColor: defaultTextColor
+                    color: entryAdditionalColor
+                    isHighlightedEntry: true
                 }
 
                 TimeLabel {
                     id: minutes
                     text: "default"
-                    color: defaultTextColor
+                    textColor: defaultTextColor
                 }
 
                 TimeLabel {
                     text: qsTr("Seconds")
-                    color: defaultTextColor
+                    textColor: defaultTextColor
+                    color: entryAdditionalColor
+                    isHighlightedEntry: true
                 }
 
                 TimeLabel {
                     id: seconds
                     text: "default"
-                    color: defaultTextColor
+                    textColor: defaultTextColor
                 }
 
                 Rectangle {
@@ -139,12 +215,9 @@ Item {
             }
         }
 
-        Rectangle {
+        back: Rectangle {
             id: dateSelection
-            anchors.top: mainRect.top
-            anchors.left: mainRect.right
-            anchors.bottom: mainRect.bottom
-            width: mainRect.width
+            anchors.fill: parent
 
             color: backgroundColor
 
@@ -182,33 +255,35 @@ Item {
             }
         }
 
+        transform: Rotation {
+            id: rotation
+            origin.x: mainRect.width/2
+            origin.y: mainRect.height/2
+            axis.x: 0; axis.y: 1; axis.z: 0
+            angle: 0
+        }
+
         states: [
             State {
-                name: "dateSelectionShown"
-                AnchorChanges {
-                    target: countingPane
-                    anchors.right: mainRect.left
-                }
-                AnchorChanges {
-                    target: dateSelection
-                    anchors.left: mainRect.left
+                name: "countingPaneShown"
+                PropertyChanges {
+                    target: rotation
+                    angle: 0
                 }
             },
             State {
-                name: "countingPaneShown"
-                AnchorChanges {
-                    target: countingPane
-                    anchors.right: mainRect.right
-                }
-                AnchorChanges {
-                    target: dateSelection
-                    anchors.left: mainRect.right
+                name: "dateSelectionShown"
+                PropertyChanges {
+                    target: rotation
+                    angle: 180
                 }
             }
         ]
 
         transitions: Transition {
-            AnchorAnimation {
+            NumberAnimation {
+                target: rotation
+                property: "angle"
                 duration: 300
             }
         }
