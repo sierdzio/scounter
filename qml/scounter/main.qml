@@ -19,7 +19,6 @@ Rectangle {
     width: 640
     height: 480
     color: "#025151"
-    //color: "#ff000000"
 
     Settings {
         property alias firstRun: root.firstRun
@@ -35,6 +34,9 @@ Rectangle {
         Component.onCompleted: {
             if (firstRun) {
                 mainRect.state = "dateSelectionShown";
+                countingPane.enabled = false;
+            } else {
+                dateSelection.enabled = false;
             }
         }
 
@@ -187,6 +189,7 @@ Rectangle {
                 }
 
                 Button {
+                    id: buttonGoToDateSetting
                     height: 30
                     width: 120
                     text: qsTr("Set date")
@@ -272,12 +275,33 @@ Rectangle {
                     target: rotation
                     angle: 0
                 }
+
+                PropertyChanges {
+                    target: countingPane
+                    enabled: true
+                }
+
+                PropertyChanges {
+                    target: dateSelection
+                    enabled: false
+                }
             },
+
             State {
                 name: "dateSelectionShown"
                 PropertyChanges {
                     target: rotation
                     angle: 180
+                }
+
+                PropertyChanges {
+                    target: countingPane
+                    enabled: false
+                }
+
+                PropertyChanges {
+                    target: dateSelection
+                    enabled: true
                 }
             }
         ]
