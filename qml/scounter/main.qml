@@ -56,7 +56,7 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottom: parent.bottom
 
-                    emitRate: 25
+                    emitRate: 22
 
                     lifeSpan: 2800
                     lifeSpanVariation: 800
@@ -78,11 +78,6 @@ Rectangle {
                     size: 20
                 }
 
-                Turbulence {
-                    anchors.fill: parent
-                    strength: 8
-                }
-
                 ItemParticle {
                     delegate: Rectangle {
                         width: 15
@@ -95,7 +90,7 @@ Rectangle {
                 Gravity {
                     anchors.left: parent.left
                     anchors.verticalCenter: parent.verticalCenter
-                    width: 50
+                    width: 40
 
                     magnitude: 80
                     angle: 180
@@ -104,7 +99,7 @@ Rectangle {
                 Gravity {
                     anchors.right: parent.right
                     anchors.verticalCenter: parent.verticalCenter
-                    width: 50
+                    width: 40
 
                     magnitude: 80
                     angle: 0

@@ -1,13 +1,13 @@
 QT += core gui qml quick
 
-SOURCES += main.cpp \
-    scdatehandler.cpp
+SOURCES += src/main.cpp \
+    src/scdatehandler.cpp
 
 HEADERS += \
-    scdatehandler.h
+    src/scdatehandler.h
 
 OTHER_FILES += \
-    android/AndroidManifest.xml
+    android/AndroidManifest.xml \
     .gitignore
 
 RESOURCES += \
