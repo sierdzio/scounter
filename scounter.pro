@@ -1,5 +1,7 @@
 QT += core gui qml quick
 
+TARGET = scounter
+
 SOURCES += src/main.cpp \
     src/scdatehandler.cpp
 
@@ -13,9 +15,9 @@ OTHER_FILES += \
 RESOURCES += \
     qmlResource.qrc
 
-ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+ANDROID_PACKAGE_SOURCE_DIR = android
 
-BUILDDIR = $$PWD/build/$$TARGET
+BUILDDIR = build
 
 DESTDIR = $${BUILDDIR}
 OBJECTS_DIR = $${BUILDDIR}
