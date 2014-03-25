@@ -10,7 +10,10 @@ HEADERS += \
 
 OTHER_FILES += \
     android/AndroidManifest.xml \
-    .gitignore
+    .gitignore \
+    README.txt \
+    AUTHORS.txt \
+    LICENSE.txt
 
 RESOURCES += \
     qmlResource.qrc
