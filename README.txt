@@ -21,4 +21,6 @@ serve as a code learning project.
 scounter requires at least Qt 5.3.0.
 
 A moderatly up-to-date Android build can be found at https://dl.dropboxusercontent.com/u/3581612/scounter.apk
+
+A video introduction can be seen here: https://www.youtube.com/watch?v=YU5l-aFdV6k
 */
